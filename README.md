@@ -1,0 +1,1 @@
+This is a hangman game. The purpose is to practice reading/writing to files.
