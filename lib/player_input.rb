@@ -17,4 +17,22 @@ module PlayerInput
     end
     @cur_guess = input.downcase
   end
+
+  def y_or_n
+    input = gets.chomp.downcase
+    until %w(y n).include?(input)
+      puts "Invalid input; please type 'y' or 'n'"
+      input = gets.chomp.downcase
+    end
+    exit if input == 'n'
+    true
+  end
+
+  def play_again?
+    y_or_n
+  end
+
+  def save_game?
+    y_or_n
+  end
 end

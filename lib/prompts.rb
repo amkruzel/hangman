@@ -36,4 +36,14 @@ module Prompts
   def incorrect_guess
     puts 'Incorrect guess!'
   end
+
+  def end_game
+    puts 'You got it!' if @cur_guess_status == @cur_word
+    puts 'You lost :(' if @guesses_remaining.zero?
+    puts 'Do you want to play again? (y/n)'
+  end
+
+  def prompt_save_game
+    puts 'Would you like to save your game? (y/n)'
+  end
 end

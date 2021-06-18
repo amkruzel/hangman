@@ -20,13 +20,13 @@ module Logic
   # check if guessed letter is in word and has not already been guessed
   # pushes guess to @guessed arr, modifies guess_state
   def check_guess?(guess, word, guess_state, guesses)
-    if guesses.include?(guess) # letter already been guessed
+    if guesses.include?(guess) # letter has already been guessed
       repeat_guess(guess)
       return false
 
     elsif word.include?(guess) # correct guess
-      word.split('').each_with_index do |letter, i| 
-        guess_state[i] = letter == guess ? letter : '_'
+      word.split('').each_with_index do |letter, i|
+        guess_state[i] = letter == guess ? letter : guess_state[i]
       end
 
       correct_guess
