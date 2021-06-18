@@ -10,7 +10,7 @@ class Game
   include Logic
   include PlayerInput
 
-  attr_reader = :new_or_load
+  attr_reader :new_or_load, :dict
 
   def initialize
     greeting
@@ -22,16 +22,22 @@ class Game
   end
 
   def new_game
-    pick_word # defines @cur_word and @cur_guess_status; creates empty @guesses array
+    load_dict
+    game_init # inits @guesses arr and @guesses_remaining
+    pick_word # defines @cur_word and @cur_guess_status
     game_rules
   end
 
   def play_round
-    show_game
+    show_game(@guesses_remaining, @guesses)
     player_guess
     guess # assigns @cur_guess
 
-    check_guess?(@cur_guess, @cur_word, @cur_guess_status, @guesses)
+    until check_guess?(@cur_guess, @cur_word, @cur_guess_status, @guesses)
+      check_guess?(@cur_guess, @cur_word, @cur_guess_status, @guesses)
+    end
+
+
   end
 
   def load_game
@@ -40,3 +46,12 @@ class Game
 end
 
 game = Game.new
+
+if game.new_or_load == '1'
+  game.new_game
+  game.play_round
+end
+
+game.play_round
+
+game.play_round

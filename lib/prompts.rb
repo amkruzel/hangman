@@ -12,20 +12,28 @@ module Prompts
   end
 
   def game_rules
-    puts 'You will be allowed six incorrect guesses'
+    puts "\tYou will be allowed six incorrect guesses"
   end
 
   def prompt_new_or_load_game
-    puts 'Do you want to start a new gane or load a saved game?'
-    puts '1 for new game'
-    puts '2 for saved game'
+    puts 'Do you want to start a new game or load a saved game?'
+    puts "'1' for new game"
+    puts "'2' for saved game"
   end
 
   def player_guess
     puts 'What is your guess?'
   end
 
+  def correct_guess
+    puts 'Great! The word includes that letter.'
+  end
+
   def repeat_guess(guess)
     puts "You have already guessed '#{guess}'. Please guess again."
+  end
+
+  def incorrect_guess
+    puts 'Incorrect guess!'
   end
 end
