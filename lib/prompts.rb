@@ -14,4 +14,18 @@ module Prompts
   def game_rules
     puts 'You will be allowed six incorrect guesses'
   end
+
+  def prompt_new_or_load_game
+    puts 'Do you want to start a new gane or load a saved game?'
+    puts '1 for new game'
+    puts '2 for saved game'
+  end
+
+  def player_guess
+    puts 'What is your guess?'
+  end
+
+  def repeat_guess(guess)
+    puts "You have already guessed '#{guess}'. Please guess again."
+  end
 end
