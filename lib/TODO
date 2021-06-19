@@ -1,1 +1,2 @@
-* keep @cur_guess_status across rounds
+* assign vars based on load game choice
+* delete loaded game from saves.json

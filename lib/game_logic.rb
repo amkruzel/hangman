@@ -40,11 +40,4 @@ module Logic
     end
     true
   end
-
-  def advance_game
-  end
-
-  def game_state
-
-  end
 end

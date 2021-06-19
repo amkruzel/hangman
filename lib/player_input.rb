@@ -35,4 +35,13 @@ module PlayerInput
   def save_game?
     y_or_n
   end
+
+  def which_game_num(amt)
+    input = gets.chomp.to_i
+    until input.between?(1, amt) && input.is_a?(Integer)
+      puts 'Invalid input; please type one of the numbers'
+      input = gets.chomp.to_i
+    end
+    input
+  end
 end

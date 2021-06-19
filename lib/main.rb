@@ -25,7 +25,7 @@ class Game
 
   def new_game
     load_dict
-    game_init # inits @guesses_arr and @guesses_remaining
+    game_init # inits @guesses and @guesses_remaining
     pick_word # defines @cur_word and @cur_guess_status
     game_rules
   end
@@ -39,7 +39,6 @@ class Game
       @cur_guess.clear
       guess
     end
-    save_and_quit
   end
 
   def game_over?
@@ -75,6 +74,7 @@ loop do
   # Load game
   if game.new_or_load == '2'
     loop do
+      game.load_game
     end
   end
 end
