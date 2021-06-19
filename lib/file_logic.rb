@@ -17,7 +17,7 @@ module LoadFiles
     @saves_hash = JSON.parse(saves_file)
   end
 
-  def load_game
+  def load_game_logic
     puts 'Which game would you like to load?'
     i = 1
     @saves_hash.each_pair do |key, value|
@@ -29,14 +29,26 @@ module LoadFiles
     end
     game_num = which_game_num(i)
 
-    # assign variable values based on which game is picked
+    # get correct game
+    j = 1
+    @saves_hash.each_pair do |key, value|
+      if j == game_num
+        @guesses = value['guesses']
+        @guesses_remaining = value['guesses_remaining']
+        @cur_word = value['cur_word']
+        @cur_guess_status = value['cur_guess_state']
+
+        @saves_hash.delete(key)
+      end
+      j += 1
+    end
   end
 
   def save_and_quit
     d = DateTime.now
     save_date = d.strftime('%F/%r')
     new_save_hash = {
-      "#{save_date}": {
+      "#{prompt_save_game_name}#{save_date}": {
         'guesses': @guesses,
         'guesses_remaining': @guesses_remaining,
         'cur_word': @cur_word,

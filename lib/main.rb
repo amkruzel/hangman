@@ -19,8 +19,6 @@ class Game
 
     # from PlayerInput
     new_or_load_game # assigns @new_or_load (1 - new, 2 - load)
-
-    # load_saves
   end
 
   def new_game
@@ -41,12 +39,25 @@ class Game
     end
   end
 
+  def game_loop
+    loop do
+      play_round
+      prompt_save_game
+      save_and_quit if save_game?
+      break if game_over?
+    end
+
+    prompt_new_or_load_game
+    new_or_load_game
+  end
+
   def game_over?
     @cur_guess_status == @cur_word || @guesses_remaining.zero?
   end
 
   def load_game
-
+    load_saves
+    load_game_logic
   end
 end
 
@@ -58,15 +69,9 @@ loop do
   if game.new_or_load == '1'
     loop do
       game.new_game
-      loop do
-        game.play_round
-        game.prompt_save_game
-        game.save_and_quit if game.save_game?
-        break if game.game_over?
-      end
 
-      game.prompt_new_or_load_game
-      game.new_or_load_game
+      game.game_loop
+
       break if game.new_or_load == '2'
     end
   end
@@ -75,6 +80,10 @@ loop do
   if game.new_or_load == '2'
     loop do
       game.load_game
+      
+      game.game_loop
+
+      break if game.new_or_load == '1'
     end
   end
 end

@@ -39,11 +39,19 @@ module Prompts
 
   def end_game
     puts 'You got it!' if @cur_guess_status == @cur_word
-    puts 'You lost :(' if @guesses_remaining.zero?
+    if @guesses_remaining.zero?
+      puts 'You lost :('
+      puts "The word was '#{@cur_word}'"
+    end
     puts 'Do you want to play again? (y/n)'
   end
 
   def prompt_save_game
-    puts 'Would you like to save your game? (y/n)'
+    puts "Would you like to save your game? 'n' to continue playing (y/n)"
+  end
+
+  def prompt_save_game_name
+    puts 'Please type a short name/signature to remember this game. You will also be able to see the game state when reloading'
+    gets.chomp
   end
 end

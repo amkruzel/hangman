@@ -24,16 +24,18 @@ module PlayerInput
       puts "Invalid input; please type 'y' or 'n'"
       input = gets.chomp.downcase
     end
+    input
+  end
+
+  def play_again?
+    input = y_or_n
     exit if input == 'n'
     true
   end
 
-  def play_again?
-    y_or_n
-  end
-
   def save_game?
-    y_or_n
+    input = y_or_n
+    true if input == 'y'
   end
 
   def which_game_num(amt)
