@@ -1,4 +1,3 @@
-
 require './file_logic'
 require './prompts'
 require './game_logic'
@@ -14,6 +13,15 @@ class Game
 
   def initialize
     greeting
+    load_saves
+    if check_for_saves
+      new_or_load_init
+    else
+      @new_or_load = '1'
+    end
+  end
+
+  def new_or_load_init
     # from Prompts
     prompt_new_or_load_game
 
@@ -56,7 +64,6 @@ class Game
   end
 
   def load_game
-    load_saves
     load_game_logic
   end
 end
@@ -80,7 +87,7 @@ loop do
   if game.new_or_load == '2'
     loop do
       game.load_game
-      
+
       game.game_loop
 
       break if game.new_or_load == '1'

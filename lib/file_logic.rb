@@ -3,6 +3,8 @@ require 'date'
 
 # module containg file loading methods
 module LoadFiles
+  SAVE_FILE = '../saves.json'
+
   def load_dict
     @dict = []
     contents = File.readlines('../dictionary.txt')
@@ -13,8 +15,12 @@ module LoadFiles
   end
 
   def load_saves
-    saves_file = File.open('../saves.json').read
-    @saves_hash = JSON.parse(saves_file)
+    saves_file = File.open(SAVE_FILE)
+    @saves_hash = saves_file.eof ? {} : JSON.parse(saves_file.read)
+  end
+
+  def check_for_saves
+    true unless File.open(SAVE_FILE).eof
   end
 
   def load_game_logic
@@ -36,7 +42,7 @@ module LoadFiles
         @guesses = value['guesses']
         @guesses_remaining = value['guesses_remaining']
         @cur_word = value['cur_word']
-        @cur_guess_status = value['cur_guess_state']
+        @cur_guess_status = value['cur_guess_status']
 
         @saves_hash.delete(key)
       end
@@ -48,7 +54,7 @@ module LoadFiles
     d = DateTime.now
     save_date = d.strftime('%F/%r')
     new_save_hash = {
-      "#{prompt_save_game_name}#{save_date}": {
+      "#{save_date}": {
         'guesses': @guesses,
         'guesses_remaining': @guesses_remaining,
         'cur_word': @cur_word,

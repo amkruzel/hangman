@@ -49,9 +49,4 @@ module Prompts
   def prompt_save_game
     puts "Would you like to save your game? 'n' to continue playing (y/n)"
   end
-
-  def prompt_save_game_name
-    puts 'Please type a short name/signature to remember this game. You will also be able to see the game state when reloading'
-    gets.chomp
-  end
 end
